@@ -15,6 +15,8 @@ import 'package:instaflutter/core/ui/loading/loading_cubit.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:instaflutter/constants.dart';
 
+import 'package:instaflutter/fav_bathrooms.dart';
+
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
 
@@ -26,7 +28,7 @@ class _SignUpState extends State<SignUpScreen> {
   File? _image;
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _key = GlobalKey();
-  String? firstName, lastName, email, password, confirmPassword;
+  String? firstName, lastName, email, password, confirmPassword, favoriteBathroom;
   AutovalidateMode _validate = AutovalidateMode.disabled;
   bool acceptEULA = true;
 
@@ -74,6 +76,11 @@ class _SignUpState extends State<SignUpScreen> {
                         SignupWithEmailAndPasswordEvent(
                             emailAddress: email!,
                             password: password!,
+                            //noted: for adding this line I added "String? favBath" to a bunch of files: authentication_bloc, authentication_event, 
+                            //authentication_repository, auth_custom_backend, auth_local_data, auth_firebase
+                            //but now the preferred bath will go with the user instance
+                            //However, isn't it better to ask this after log in instead of sign up?
+                            favBath: favoriteBathroom,
                             image: _image,
                             lastName: lastName,
                             firstName: firstName));
@@ -279,6 +286,35 @@ class _SignUpState extends State<SignUpScreen> {
                                 cursorColor: Color(colorPrimary),
                                 decoration: getInputDecoration(
                                   hint: 'Confirm Password'.tr(),
+                                  darkMode: isDarkMode(context),
+                                  errorColor:
+                                      Theme.of(context).colorScheme.error,
+                                  colorPrimary: Color(colorPrimary),
+                                ),
+                              ),
+                            ),
+
+                            //the part asking the question needed
+                            const Padding(
+                              padding: EdgeInsets.only(
+                                  top: 16.0, right: 8.0, left: 8.0),
+                              child: Text('What is your favorite bathroom you’ve used?',
+                                style: TextStyle(fontFamily: AutofillHints.email, height: 0.8, fontSize: 18.0))
+                            ),
+                            
+                            //the text field receiving the user input of their favorate type of bathroom
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 16.0, right: 8.0, left: 8.0),
+                              child: TextFormField(
+                                keyboardType: TextInputType.emailAddress,
+                                textInputAction: TextInputAction.next,
+                                onSaved: (String? val) {
+                                  favoriteBathroom = val;
+                                },
+                                decoration: getInputDecoration(
+                                  //use the fav_bathroom.dart function getRandomString to have the random hint
+                                  hint: getRandomString().tr(),
                                   darkMode: isDarkMode(context),
                                   errorColor:
                                       Theme.of(context).colorScheme.error,

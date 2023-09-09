@@ -97,6 +97,7 @@ class AuthenticationBloc
           await authenticationRepository.signUpWithEmailAndPassword(
               emailAddress: event.emailAddress,
               password: event.password,
+              favBath: event.favBath,
               image: event.image,
               firstName: event.firstName,
               lastName: event.lastName);

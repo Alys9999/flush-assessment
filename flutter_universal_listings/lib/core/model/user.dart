@@ -3,12 +3,16 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 
+
+//add the favoriteBathroom attribute
 class User with ChangeNotifier {
   String email;
 
   String firstName;
 
   String lastName;
+
+  String favoriteBathroom;
 
   UserSettings settings;
 
@@ -33,6 +37,7 @@ class User with ChangeNotifier {
       this.firstName = '',
       this.phoneNumber = '',
       this.lastName = '',
+      this.favoriteBathroom = '',
       this.active = false,
       lastOnlineTimestamp,
       appIdentifier,
@@ -56,6 +61,7 @@ class User with ChangeNotifier {
         email: parsedJson['email'] ?? '',
         firstName: parsedJson['firstName'] ?? '',
         lastName: parsedJson['lastName'] ?? '',
+        favoriteBathroom: parsedJson['favoriteBathroom'] ?? '',
         active: parsedJson['active'] ?? false,
         lastOnlineTimestamp: parsedJson['lastOnlineTimestamp'] is Timestamp
             ? (parsedJson['lastOnlineTimestamp'] as Timestamp).seconds
@@ -74,6 +80,7 @@ class User with ChangeNotifier {
       'email': email,
       'firstName': firstName,
       'lastName': lastName,
+      'favoriteBathroom': favoriteBathroom,
       'settings': settings.toJson(),
       'phoneNumber': phoneNumber,
       'id': userID,

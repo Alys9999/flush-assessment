@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:instaflutter/core/model/user.dart';
 import 'package:instaflutter/listings/listings_app_config.dart';
 
+
+//add the favoriteBathroom attribute
 class ListingsUser extends User {
   bool isAdmin;
 
@@ -16,6 +18,7 @@ class ListingsUser extends User {
     firstName = '',
     phoneNumber = '',
     lastName = '',
+    favoriteBathroom = '',
     active = false,
     lastOnlineTimestamp,
     settings,
@@ -28,6 +31,7 @@ class ListingsUser extends User {
           userID: userID,
           active: active,
           email: email,
+          favoriteBathroom: favoriteBathroom,
           pushToken: pushToken,
           phoneNumber: phoneNumber,
           profilePictureURL: profilePictureURL,
@@ -43,6 +47,8 @@ class ListingsUser extends User {
       email: parsedJson['email'] ?? '',
       firstName: parsedJson['firstName'] ?? '',
       lastName: parsedJson['lastName'] ?? '',
+      //added this line
+      favoriteBathroom: parsedJson['favoriteBathroom'],
       active: parsedJson['active'] ?? false,
       lastOnlineTimestamp: parsedJson['lastOnlineTimestamp'] is Timestamp
           ? (parsedJson['lastOnlineTimestamp'] as Timestamp).seconds
@@ -66,6 +72,8 @@ class ListingsUser extends User {
       'email': email,
       'firstName': firstName,
       'lastName': lastName,
+      //added this line
+      'favoriteBathroom':favoriteBathroom,
       'settings': settings.toJson(),
       'phoneNumber': phoneNumber,
       'id': userID,

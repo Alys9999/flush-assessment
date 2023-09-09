@@ -72,6 +72,7 @@ class AuthCustomBackendUtils extends AuthenticationRepository {
   Future signUpWithEmailAndPassword(
       {required String emailAddress,
       required String password,
+      String? favBath,
       File? image,
       firstName = 'Anonymous',
       lastName = 'User'}) {

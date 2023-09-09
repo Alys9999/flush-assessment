@@ -324,6 +324,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               color: Colors.red,
                             ),
                           ),
+                          //this is the line as the requirement stated
+                          //though will having a clickable button showing a page of a list of favorite Bathroom better?
+                          Text("Your favorite bathroom is: ${currentUser.favoriteBathroom}"
+                          ),
                           if (currentUser.isAdmin)
                             ListTile(
                               dense: true,

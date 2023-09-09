@@ -219,6 +219,7 @@ class AuthFirebaseUtils extends AuthenticationRepository {
       {required String emailAddress,
       required String password,
       File? image,
+      String? favBath,
       firstName = 'Anonymous',
       lastName = 'User'}) async {
     try {
@@ -237,6 +238,7 @@ class AuthFirebaseUtils extends AuthenticationRepository {
           settings: UserSettings(),
           email: emailAddress,
           firstName: firstName,
+          favoriteBathroom: favBath,
           userID: result.user?.uid ?? '',
           lastName: lastName,
           pushToken: await firebaseMessaging.getToken() ?? '',

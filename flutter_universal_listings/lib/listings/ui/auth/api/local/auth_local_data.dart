@@ -71,6 +71,7 @@ class AuthLocalData extends AuthenticationRepository {
   signUpWithEmailAndPassword(
       {required String emailAddress,
       required String password,
+      String? favBath,
       File? image,
       firstName = 'Anonymous',
       lastName = 'User'}) {
